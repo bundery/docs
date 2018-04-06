@@ -1,16 +1,18 @@
 # Struts2执行原理
 
-> struts的核心原理就是通过拦截器来处理客户端的请求，经过拦截器一系列的处理后，再交给Action的指定方法处理。
-
-struts官方的工作原理图：
+> struts2 的核心原理就是通过拦截器来处理客户端的请求，经过拦截器一系列的处理后，再交给 Action 的指定方法处理。
 
 ![Struts2原理](http://wx1.sinaimg.cn/mw690/9e6aadb3gy1ffn657ssfkj20dm0czgmi.jpg)
 
-首先客户端发来HttpServletRequest请求，传递给FilerDispatcher（ActionMapper是访问静态资源（struts的jar文件等）时用的，平时很少用），然后FilerDispatcher创建一个ActionProxy对象，ActionProxy对象通过ConfigurationManager对象获得struts.xml文件中的配置，ActionProxy拥有一个ActionInvocation对象的实例，通过调用ActionInvocation的invoke()方法，来按顺序交由Interceptor处理，最后交由Action，接着返回Result，再逆序经过Interceptor，最后得到HttpServletResponse返回给客户端。
+1. 客户端发送 `HttpServletRequest` 请求，传递给 `Struts2PrepareAndExcuteFilter `（ActionMapper 是访问静态资源 【struts2 的 jar 文件等】时用的）；
+2. 加载 web.xml 文件读取过滤器信息，经过一系列的过滤器之后，最后会经过 `Struts2PrepareAndExcuteFilter ` （简称 SPAE）过滤器；
+3. SPAE 询问 `ActionMapper` 来决定请求是否要交给某个 `Action`(Controller)，如果是 SPAE 就把请求委托给 `ActionProxy`；
+4. ActionProxy 对象通过 `ConfigurationManager` 对象获得 `struts.xml` 配置文件的内容，最后找到需要调用的目标 Action ，然后 ActionProxy 组建出 `ActionInvocation` 对象（包含一系列拦截器及 Action 执行链）；
+5. ActionProxy 通过调用 ActionInvocation.invoke() 方法，来按顺序交由 `Interceptor` 处理，最后交由 Action，之后返回 Result，再逆序经过Interceptor，最后得到 HttpServletResponse 返回给客户端。
 
 ![Struts2原理时序图](http://wx1.sinaimg.cn/mw690/9e6aadb3gy1ffn69ozarwj20u50fqq3t.jpg)
 
-1. 模拟ActionInvocation：
+1. 模拟 ActionInvocation：
 
 ```java
     package com.tgb.struts;  
@@ -18,7 +20,7 @@ struts官方的工作原理图：
     import java.util.List;  
     // 这个自定义的ActionInvocation是将Interceptor写在里面的，真实的ActionInvocation是通过反射加载的
     public class ActionInvocation {  
-        List<Intercepto> interceptors = new ArrayList<Interceptor>();  
+        List<Interceptor> interceptors = new ArrayList<Interceptor>();  
         int index = -1;  
         Action a = new Action();  
 
@@ -38,7 +40,7 @@ struts官方的工作原理图：
     } 
 ```
 
-2. 模拟 Interceptor接口以及两个简单实现类：
+2. 模拟 Interceptor 接口以及两个简单实现类：
 
 ```java
     package com.tgb.struts;  

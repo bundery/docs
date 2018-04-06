@@ -1,7 +1,7 @@
 # Maven
 > Maven是基于项目对象模型(POM)、可以通过一小段描述信息来管理项目的构建、报告和文档的软件项目管理工具。
 
-## Maven标准的项目结构
+## 标准项目结构
 
 | 目录               | 描述                   |
 |--------------------|------------------------|
@@ -67,14 +67,14 @@
 </build>
 ```
 
-### 依赖冲突
+## 依赖冲突
 1. 短路径优先
     + A->B->C->X(jar)
     + A->D->X(jar) 优先选用这个
 2. 先声明优先
   如果路径长度相同，则选用声明在前面的
 
-### 聚合
+## 聚合
 > 如果想一次构建两个项目，而不是到两个模块的目录下分别执行mvn命令，就要使用聚合，聚合就是专门解决该需求的。为了能够使用一条命令就能构建a和b两个模块，需要创建一个额外的base模块，然后通过该模块构建整个项目的所有模块。module中配置的是各个子模块的相对路径，如当前pom位于../Base/pom.xml，则聚合的俩个项目路径分别为../Base/a/及../Base/b。
 
 ```xml
@@ -92,7 +92,7 @@
 </project>
 ```
 
-### 继承
+## 继承
 > 当各个模块中都依赖某些共有jar时，如spring、common、log4j等等，这时可以新定义一个模块，作为所有模块的父模块，所有这些配置均在该新模块中配置，各个子模块只需继承就好了，这样就可以统一管理依赖jar的version等。由于dependency对于不同的模块依赖是不一样的，如果把各个模块所有的dependency都移到parent中的话，会导致所有的子模块都依赖父模块中依赖的所有jar，这是很不灵活的。所以父模块中使用dependencymManager管理依赖，在dependencyManagement元素下的依赖声明不会引入到实际的依赖，必须在子模块中显示声明dependency才会生效。为了方便也可以把聚合的配置直接写入到继承中。
 
 父模块：
@@ -150,12 +150,12 @@
 </project>
 ```
 
-parent下的子元素groupId、artifactId和version指定了父模块的坐标，这三个元素是必须的，元素relativePath表示父模块POM的相对路径，当项目构建时，maven会首先根据relativePath检查父POM，如果找不到，再从本地仓库查找。relativePath的默认值是../pom.xml，也就是说，maven默认父POM在上一层目录下。。dependency只需配置groupId及artifactId而不需要配置version及scope，这样就能方便配置并可以统一管理版本。另外，groupId、version、properties、repositories、dependencies、dependcyManagement等元素都被子模块所继承。
+parent 下的子元素 groupId、artifactId 和 version 指定了父模块的坐标，这三个元素是必须的，元素 relativePath 表示父模块 POM 的相对路径，当项目构建时 maven 首先会根据 relativePath 检查父 POM，如果找不到再从本地仓库查找。relativePath 的默认值是 ../pom.xml，也就是说，maven 默认父 POM 在上一层目录下，dependency 只需配置 groupId 及 artifactId 而不需要配置 version及 scope，这样就能方便配置并可以统一管理版本。另外：groupId、version、properties、repositories、dependencies、dependcyManagement 等元素都被子模块所继承。
 
 ## 构建周期
-maven有三个内置周期，每个周期都由不同的步骤所组成。
+maven 有三个内置周期，每个周期都由不同的步骤所组成。
 
-- clean(清理target文件夹)
+- clean(清理 target 文件夹)
     + pre-clean：执行清理前的工作
     + clean：清理上次构建生成的所有文件
     + postclean：执行清理后的文件
@@ -173,12 +173,12 @@ maven有三个内置周期，每个周期都由不同的步骤所组成。
     + post-site 在生成项目站点后要完成的工作
     + site-deploy 发布生成的站点到服务器上
 
-### 插件
-某个步骤的执行实际上是调用某些plugin的goal，一个周期步骤可以关联多个插件goal。
+### plugin
+某个步骤的执行实际上是调用某些 plugin 的 goal，一个周期步骤可以关联多个插件 goal。
 
 - 内置关联的goal
 
-|          步骤          |               plugin的goal               |
+| 步骤                   | plugin 的 goal                           |
 | ---------------------- | ---------------------------------------- |
 | process-resources      | resources:resources                      |
 | compile                | compiler:compile(插件可以有多个goal)     |

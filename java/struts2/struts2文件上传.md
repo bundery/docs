@@ -1,11 +1,9 @@
 # Struts2接收图片
-Action接收file对象需要在自定义Action类定义三个属性，并且需要getter和setter方法。
+Action 接收 File 对象需要在自定义 Action 类定义三个属性，并且需要 getter 和 setter 方法。
 
-1. File对象类型的属性，代表所上传的文件。
-2. File名称是：FileName结尾的String类型的属性。
-3. File类型：ContentType结尾的String类型的属性。
-
-e.g:
+1. File 类型的属性接收所上传的文件；
+2. FileName 结尾的 String 类型的属性接收上传文件 的名称；
+3. ContentType 结尾的 String 类型的属性接收上传文件的类型。
 
 ```java
 public class UserAction extends ActionSupport {

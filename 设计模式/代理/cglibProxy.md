@@ -1,6 +1,4 @@
-
-
-# cglib代理
+# CGLIB代理
 
 使用 cglib(Code Generation Library) 实现动态代理，不要求委托类必须实现接口，底层采用 asm 框架生成代理类的字节码，需要导入第三方 jar 包。
 
