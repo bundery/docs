@@ -1,0 +1,80 @@
+# issues
+
+## update返回值
+
+> 在使用 mybatis 框架时，默认情况下 update、insert、delete语句执行完返回的 int 类型的值并不是被影响的记录的主键，也不是被影响的记录的条数，而是匹配的记录条数。
+
+| id   | score | age  |
+| ---- | ----- | ---- |
+| 1000 | 60    | 16   |
+| 1001 | 60    | 16   |
+
+配置的SQL：
+
+```xml
+<update id="updateByAge" parameterType="Student">
+        UPDATE student
+        SET score=#{score}
+        WHERE status=#{status}
+</update>
+```
+
+执行`int resultCode = studentMapper.updateByAge(new Student(70,16))`得到resultCode 的值2，数据库中也有 2 条记录被更新；我们再重新执行这句代码，resultCode 应该会是 0，因为执行重复的 update 操作将不会影响到新的行数，但是结果却是 2，可以看出返回的结果并不是受影响的记录数，而是`匹配的行数`。
+
+> 其实这并不是 mybatis 自己的返回值，mybatis 仅仅是调用的数据库连接驱动（通常是 `JDBC` ）的返回值，如果驱动告知更新 2 条记录受影响，那么 mybatis 的返回值就会是 2 ，和 mybatis 本身是没有关系的。
+
+### 返回受影响的行数
+
+默认情况下 URL 是`jdbc:mysql://localhost:3306/test_db`，通过对jdbc.url 显式的指定 `useAffectedRows`选项，就可以得到受影响的记录的条数：
+
+```
+jdbc:mysql://localhost:3306/test_db?useAffectedRows=true
+```
+
+### 返回主键
+
+1. 主键使用自增字段时，可以如下设置：
+
+   ```xml
+   <insert id="insertUser" useGeneratedKeys="true"
+       keyProperty="id">
+     insert into user (username,password)
+     values (#{username},#{password})
+   </insert>
+   ```
+
+   或者：
+
+   ```xml
+   <insert id="insertUser">
+     <selectKey resultType="int" keyProperty="id" order="after">
+   	SELECT LAST_INSERT_ID()
+     </selectKey>
+     insert into user (username,password)
+     values (#{username},#{password})
+   </insert>
+   ```
+
+   |        属性        | 作用                                       |
+   | :--------------: | ---------------------------------------- |
+   | useGeneratedKeys | 会令 MyBatis 使用 JDBC 的 getGeneratedKeys 方法来取出由数据库内部生成的主键，默认：`false`。 |
+   |   keyProperty    | MyBatis 会通过 getGeneratedKeys 的返回值或者通过 insert 语句的 selectKey 子元素设置它的键值，默认：`unset`。 |
+   |    resultType    | 结果类型，MyBatis 一般可以推算出来，但是为了更加确定写上也不会有什么问题。 |
+   |      order       | 这可以被设置为 BEFORE 或 AFTER。如果设置为 BEFORE，那么它会首先选择主键，设置 keyProperty 然后执行插入语句。如果设置为 AFTER，那么先执行插入语句，然后是 selectKey 元素。 |
+
+2. 主键没使用自增字段：
+
+   ```xml
+   <insert id="insertUser">
+     <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
+   	SELECT uuid()
+     </selectKey>
+     insert into user (id,username,password)
+     values (#{id},#{username},#{password})
+   </insert>
+   ```
+
+   > order = before时，会先执行 `SELECT UUID()`生成一个UUID字符串，然后通过`user.setID()`给对象设置属性，最后执行`insert`语句。
+
+
+
