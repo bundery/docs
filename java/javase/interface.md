@@ -1,6 +1,6 @@
 # 接口
 
-接口里的成员允许有`static nest-classes`、`nest-interfaces`、`static nest-enum`、`public static final fields`、`pubic abstract method`、`default public method`（>=java 8）、`public static methods`（>=java 8）
+接口内的成员可包含：`static nest-classes`、`nest-interfaces`、`static nest-enum`、`public static final fields`、`pubic abstract method`、`default public method`（>=java 8）、`public static methods`（>=java 8）
 
 ## default方法
 
