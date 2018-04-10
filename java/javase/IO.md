@@ -87,7 +87,7 @@ OutputStream 也有 void write( byte b[ ], int off, int len ) 方法，也就是
 
 ?> 如果要写入的数据不满 8 kb，则 BufferOutputStream 不会将这些数据写入到底层 IO ，造成数据丢失，因此需要调用 flush（）方法，强制将 byte[] 数组中的数据写入到底层 IO。FileOutputStream 类中的 flush() 方法为空，因此使用 FileOutputStream 对象进行读写操作时不需要调用 flush() 方法。
 
-!> PrintWriter里面其实操作的就是一个BufferedWriter对象，因此也需要调用flush（）方法来刷新。
+!> PrintWriter 里面其实操作的就是一个 BufferedWriter 对象，因此也需要调用 flush() 方法来刷新。
 
 ```java
 class BufferedOutputStream extends FilterOutputStream {

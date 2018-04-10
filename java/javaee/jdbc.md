@@ -12,8 +12,8 @@
 * 有一个容器可以管理多个连接
 * 必须拥有回收连接的能力
 * 数据库用户名及连接密码
-* ConnectionURL（如："jdbc\:mysql://localhost:3306/helloWorld"）
-* 相应的数据库驱动（如：com.mysql.jdbc.Drive）
+* ConnectionURL（如：`jdbc:mysql://localhost:3306/helloWorld`）
+* 相应的数据库驱动（如：`com.mysql.jdbc.Drive`）
 * MaxPoolSize 连接池中最大连接数
 * MinPoolSize 连接池中最小连接数
 * ...

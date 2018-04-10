@@ -1,4 +1,4 @@
-# 映射文件
+# Mapper映射文件
 
 ## resultMap 与 resultType
 
