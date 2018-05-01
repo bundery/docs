@@ -28,6 +28,35 @@
 - C 切换到指定目录
 - f 指定压缩文件
 
+## 用户组及权限
+
+### 用户组管理
+
+- `usermod -a -G group user`：把 user 用户添加到 group 组，例如：`usermod -a -G www-data jerry` （a 代表 append）；
+- `groups user`：查看 user 用户所在的组；
+- `vim /etc/group`：查看所有用户组的信息
+
+### 文件所有者
+
+- `chown user:group file` ：改变文件的所有者为指定的用户和组
+
+### 权限
+
+| 缩写 | 全拼   | 对应数字 |
+| ---- | ------ | -------- |
+| r    | read   | 4        |
+| w    | write  | 2        |
+| e    | excute | 1        |
+| -    | 无权限 | 0        |
+
+`chmod 764 file`：
+
+- `7=r+w+e`：代表文件所属的 user 拥有所有权限；
+- `6=4+2`：代表文件所属的 group 拥有读写权限；
+- `4=r`：代表其他用户 others 只拥有读的权限
+
+
+
 ## vim
 
 - 按`CTRL+V`启用块可视模式，之后移动光标选择块；

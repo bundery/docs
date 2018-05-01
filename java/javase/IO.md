@@ -169,3 +169,27 @@ public class Test {
 }
 ```
 
+## 组与权限
+
+### 设置权限
+
+```java
+//为创建的文件设置权限 770
+File saveFile=new File("filePath");
+HashSet<PosixFilePermission> posixFilePermissions=new HashSet<>();
+posixFilePermissions.add(PosixFilePermission.OWNER_EXECUTE);
+posixFilePermissions.add(PosixFilePermission.OWNER_READ);
+posixFilePermissions.add(PosixFilePermission.OWNER_WRITE);
+posixFilePermissions.add(PosixFilePermission.GROUP_EXECUTE);
+posixFilePermissions.add(PosixFilePermission.GROUP_READ);
+posixFilePermissions.add(PosixFilePermission.GROUP_WRITE);
+posixFilePermissions.add(PosixFilePermission.OTHERS_READ);
+Files.setPosixFilePermissions(saveFile.toPath(),posixFilePermissions );
+```
+
+### 设置文件所属组
+
+```java
+Files.getFileAttributeView(saveFile.toPath(),PosixFileAttributeView.class,LinkOption.NOFOLLOW_LINKS).setOwner(FileSystems.getDefault().getUserPrincipalLookupService().lookupPrincipalByName("www-data"));
+```
+

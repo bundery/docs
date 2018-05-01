@@ -37,3 +37,7 @@ sudo apt install indicator-sysmonitor
 
 ### mycli
 mycli 是 mysql 的命令行工具，具有语法高亮和自动补全功能。`sudo apt install mycli`，可以在`~/myclirc`修改配色。
+
+## Xcompmg
+
+安装 Xcompmg 可以解决 Lxde/Lubuntu 环境下黑框的问题。

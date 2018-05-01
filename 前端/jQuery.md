@@ -1,31 +1,30 @@
 # jQuery
 
-> jQuery 是为处理 Html 事件而特别设计的。
-> 使用原则：应当把所有的 jQuery 代码置于事件处理函数，把所有事件处理函数置于文档就绪事件处理器中。
-
-## 函数
-由于 javascript 语句是逐一执行的，按照次序没红花之后的语句可能会产生错误或页面冲突，因为动画还没有完成，为了解决这个问题，就可以以参数的形式添加 callback 函数，它是在动画 100% 完成后，才调用 *		callback函数。
+jQuery 是为处理 html 事件而特别设计的。使用原则：应当把所有的 jQuery 代码置于事件处理函数，把所有事件处理函数置于文档就绪事件处理器中。
 
 ### 函数事件
-- ${document}.ready(function)：将函数绑定到文档的就绪事件（当页面DOM完成加载执行。在html的头部的script标签中的，不处于ready()中的JS代码将早于ready()执行。）jQuery使用document.ready来保证所要执行的代码是在DOM元素被加载完成的情况下执行。可以在同一个页面中无限次地使用$(document).ready()事件。其中注册的函数会按照（代码中的）先后顺序依次执行。
-- $(document).load()：当web页面以及其附带的资源文件，如CSS，Scripts，图片等，加载完毕后执行此方法。常用于检测页面（及其附带资源）是否加载完毕。onload()的方法是在页面加载完成后才发生，这包括DOM元素和其他页面元素（例如图片）的加载，因此，使用document.ready()方法的执行速度比onload()的方法要快。
-- $(document).unload()：
-此事件在停止浏览页面的时候触发，此操作可能存在于刷新操作/F5，单击上一页按钮，进入其他页面或关闭整个tab或窗口。
-- $(selector).click(function)：触发或将函数绑定到被选元素的点击事件
-- $(selector).dbclick(function)：触发或将函数绑定到被选元素的双击事件
-- $(selector).focus(function)：触发或将函数绑定到被选元素的获取焦点事件
-- $(selector).mouseover(function)：触发或将函数绑定到被选元素的悬停事件
+- \${document}.ready(function)：将函数绑定到文档的就绪事件（当页面 DOM元素 加载完成后执行）。可以在同一个页面中无限次地使用 $(document).ready() 事件，其中注册的函数会按照代码的先后顺序依次执行；
+
+  ?> 在 html 的头部的 script 标签中不处于 ready() 中的 JS 代码将早于 ready() 执行。
+
+- $(window).load()：当 dom元素 以及页面的资源文件（如 css、scripts、图片等）加载完毕后执行此方法；
+
+- $(window).unload()：停止浏览页面的时候触发，如刷新、单击上一页、进入其他页面或关闭窗口；
+
+- $(selector).on( events，handler(eventObject) )：在选定的元素上绑定事件函数；
+
+- $(selector).trigger(event)：手动触发指定的事件；
 
 ### 隐藏显示
-- ${selector}.hide(speed,callback);：隐藏元素
-- ${selector}.show(speed,callback);：显示元素
-- ${selector}.toggle(speed,callback);：显示被隐藏的元素，并隐藏已显示的元素
+- $(selector).hide(speed,callback);：隐藏元素
+- $(selector).show(speed,callback);：显示元素
+- $(selector).toggle(speed,callback);：显示被隐藏的元素，并隐藏已显示的元素
 
 ### 淡入淡出
-- ${selector}.fadeIn(speed,callback);：淡入已隐藏元素
-- ${selector}.fadeOut(speed,callback);：淡出已显示元素
-- ${selector}.fadeToggle(speed,callback);：淡入已隐藏元素或淡出已显示元素
-- ${selector}.fadeTo(speed,opacity,callback);：渐变为不透明度(0与1之间)
+- $(selector).fadeIn(speed,callback);：淡入已隐藏元素
+- $(selector).fadeOut(speed,callback);：淡出已显示元素
+- $(selector).fadeToggle(speed,callback);：淡入已隐藏元素或淡出已显示元素
+- $(selector).fadeTo(speed,opacity,callback);：渐变为不透明度(0与1之间)
 
 ### 滑动
 - $(selector).slideDown(speed,callback);：向下滑动元素
@@ -40,7 +39,7 @@
 可在相同的元素上运行多条jQuery命令。
 - $("#p1").css("color","red").slideUp(2000).slideDown(2000);：先变红再向上滑动，再向下滑动。
 
-## jQuery DOM
+## DOM
 - text() ： 设置或返回所选元素的文本内容
 - html() ： 设置或返回所选元素的内容（包括 HTML 标记）
 - val()  ： 设置或返回表单字段的值
