@@ -35,7 +35,20 @@ sudo apt update
 sudo apt install indicator-sysmonitor
 ```
 
+## mysql
+
+`sudo apt install mysql-server` 安装 mysql 时没有要求输入 `root` 密码，可以先用其他账号登录，然后再修改 root 密码。
+
+```bash
+# 这个文件中系统默认给我们分配的用户名和密码，先利用这个账户登录
+cat /etc/mysql/debian.cnf
+
+# 修改root密码（mysql-5.7版本）
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'newPassword';
+```
+
 ### mycli
+
 mycli 是 mysql 的命令行工具，具有语法高亮和自动补全功能。`sudo apt install mycli`，可以在`~/myclirc`修改配色。
 
 ## Xcompmg

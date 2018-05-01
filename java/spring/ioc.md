@@ -109,10 +109,8 @@ public class PhoneFactoryBean implements FactoryBean {
   ```java
   //如果applicationContext对象不存在，就抛出异常
   ApplicationContext ac1 = WebApplicationContextUtils.getRequiredWebApplicationContext(ServletContext sc);
-
   //如果applicationContext对象不存在，返回null
   ApplicationContext ac2 = WebApplicationContextUtils.getWebApplicationContext(ServletContext sc);
   ```
-
 
 3. 自定义类实现  `ApplicationContextAware` 接口，并配置在 applicationContext.xml 文件中，Spring 初始化该类时，会自动把 applicationContext 对象注入。
