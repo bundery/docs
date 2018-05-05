@@ -85,4 +85,28 @@
    |    :w/:wq     |   保存/保存后退出   |
    | :w [filename] |       另存为        |
 
-   ​
+
+## 竖线（|）
+
+管道符号，用法：`command1 | command2`，把 command1 的执行结果作为 command2 的输入传递给 command2。
+
+比如，`ls | grep server` ，首先执行 `ls` 命令，本来输出要通过 `stdout` 输出到屏幕上，加上 `|` 之后，就会把这个输出输入到 `grep` 中，效果是显示当前文件夹下包含 `server` 字符的文件/文件夹。
+
+## grep
+
+> **grep**（global search regular expression(RE) and print out the line），全面搜索正则表达式并把行打印出来。
+
+```bash
+grep [option] pattern file
+```
+
+`grep "name" a.txt` ：打印 a.txt 文件中包含 name 的行。 
+
+|     option      |                     作用                     |
+| :-------------: | :------------------------------------------: |
+|       -i        |            大小写不敏感，默认敏感            |
+|       -c        |                 匹配到的行数                 |
+|       -n        |                匹配部分的行号                |
+|       -e        | 包含多个匹配模式  `ls | grep -e 'se' -e 'v'` |
+| -A/-B/-C number |          打印匹配行前/后/前后 n 行           |
+
