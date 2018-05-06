@@ -107,6 +107,6 @@ grep [option] pattern file
 |       -i        |            大小写不敏感，默认敏感            |
 |       -c        |                 匹配到的行数                 |
 |       -n        |                匹配部分的行号                |
-|       -e        | 包含多个匹配模式  `ls | grep -e 'se' -e 'v'` |
+|       -e        | 包含多个匹配模式  `ls \| grep -e 'se' -e 'v'` |
 | -A/-B/-C number |          打印匹配行前/后/前后 n 行           |
 
