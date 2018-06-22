@@ -1,56 +1,40 @@
-# AJAX
+# 原生AJAX实现
 AJAX = 异步 JavaScript 和 XML（Asynchronous JavaScript and XML）。
 
-> 在不重载整个网页的情况下，AJAX通过后台加载数据，并在网页上进行显示。通过 jQuery AJAX 方法，能够使用 HTTP Get 和 HTTP Post  从远程服务器上请求文本、HTML、XML 或 JSON - 同时能够把这些外部数据直接载入网页的被选元素中。
-> 通过AJAX，JavaScript无需等待服务器的响应，而是：
-> - 在等待服务器响应时执行其他脚本
-> - 当响应就绪后对相应进行处理
+> 在不重载整个网页的情况下，AJAX 通过后台加载数据，并在网页上进行显示。可以从远程服务器上请求文本,HTML,XML,JSON，同时能够把这些外部数据直接载入网页的被选元素中。
+
+通过 AJAX，JavaScript 无需等待服务器的响应，而是：
+
+1. 在等待服务器响应时执行其他脚本;
+2. 当响应就绪后对相应进行处理。
 
 ## XMLHttpRequest
-XMLHttpRequest对象是AJAX的基础。
-创建对象 `var variable=new XMLHttpRequest();`
+XMLHttpRequest对象是AJAX的基础。创建对象：`var variable=new XMLHttpRequest();`
 
 ### 服务器请求
-- open(method,url,async)：
-    - method:（get/post）规定请求的类型
-    - URL:(文件在服务器上的位置)以及是否异步处理请求
+- xmlHttpRequest.open(method,url,async)
+    - method:（get/post）规定请求的类型；
+    - URL:(文件在服务器上的位置)以及是否异步处理请求；
     - async:true(异步)/false(同步，这种情况下会等到服务器响应就绪才继续执行，如果服务器繁忙或缓慢，应用程序会挂起或停止。)
-- send(string)将将请求发送到服务器。string:仅用于POST请求
+- xmlHttpRequest.send(string) 将将请求发送到服务器（带 string 参数仅用于 POST 请求）。
 
 ```javascript
-//向服务器发送数据
-//url参数是服务器上文件的地址，该文件可以回任何类型的文件，如.txt和xml或者服务器脚本文件，如.asp和.php（在传回响应之前，能够在服务器上执行任务。）
-//如果要XMLHttpRequest对象可用于AJAX，async的参数必须设置为true。
+// url参数是服务器上文件的地址，该文件可以回任何类型的文件，如txt,xml 或 php（在传回响应之前，能够在服务器上执行任务。）
 xmlhttp.open("GET","test.txt",true);
 xmlhttp.send();
 ```
 
-与POST相比，GET更简单也更快，并且在大部分情况下都能用。
-然而，在下列情况下，要使用POST请求：
-
-- 无法使用缓存文件（更新服务器上的文件或者数据库）
-- 向服务器发送大量数据（POST没有数据量限制）
-- 发送包含未知字符的用户输入时，POST比GET更稳定可靠
-
-使用GET请求可能得到的是缓存的结果。为了避免这种情况，想URL添加一个唯一的ID:
+使用 GET 请求可能得到的是缓存的结果，为了避免可以在 URL 添加一个唯一的 ID:
 
 ```javascript
 xmlhttp.open("GET","demo_get.asp?t="+Math.random(),true);
 xmlhttp.send();
 ```
 
-通过GET请求发送信息：
-
-```javascript
-xmlhttp.open("GET","demo_get2.asp?fname=Bill&lname=Gates",true);
-xmlhttp.send();
-```
-
-如需要像 HTML 表单那样 POST 数据，使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 方法中指定要发送的数据：
+如果需要像 HTML 表单那样 POST 数据，使用 setRequestHeader() 来添加 HTTP 头，然后在 send() 方法中指定要发送的数据：
 
 ```javascript
 xmlhttp.open("POST","ajax_test.asp",true);
-//向请求添加HTTP头
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 xmlhttp.send("fname=Bill&lname=Gates");
 ```

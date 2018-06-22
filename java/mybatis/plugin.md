@@ -168,4 +168,4 @@ public class Configuration{
 
 ## 执行流程图
 
-![mybatis拦截器](http://wx4.sinaimg.cn/mw690/9e6aadb3gy1fkh2nvwqbrj20pr0iwaas.jpg)
+![mybatis拦截器](https://wx4.sinaimg.cn/mw690/9e6aadb3gy1fkh2nvwqbrj20pr0iwaas.jpg)

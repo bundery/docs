@@ -15,13 +15,20 @@
   window.$docsify = {
     name: '',
     repo: '',
-    homepage: 'ubuntu/command.md',
+    homepage: 'linux/command.md',
     loadSidebar: true,
     auto2top: true,
-    search: 'auto'
+    search: {
+		placeholder: '搜索'
+	},
+	pagination: {
+		previousText: '上一章节',
+		nextText: '下一章节'
+	}
   }
 </script>
 <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
 <script src="//unpkg.com/prismjs/components/prism-java.min.js"></script>
+<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
 </html>

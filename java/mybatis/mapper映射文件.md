@@ -17,16 +17,20 @@ ${} 没有预编译，值会原样输出，有可能会导致 SQL 注入，但�
 String input = "id";
 String sql = "select * from student order by "+input;
 PreparedStatement st = con.prepareStatement(sql);
-输出结果：select * from student order by id
-SQL语句合法，正常执行。
+/**
+* 输出结果：select * from student order by id
+* SQL语句合法，正常执行。
+*/
 -------------------------------------------------------------------------------------------
 //#{}
 String input = "id";
 String sql = "select * from student order by ?";
 PreparedStatement st = con.prepareStatement(sql);
 st.setString(1,input);
-输出结果：select * from student order by 'id'
-order by 后面如果是采用预编译的形式动态输入参数，那么实际插入的参数是一个字符串，SQL语句不合法。
+/**
+* 输出结果：select * from student order by 'id'
+* order by 后面如果是采用预编译的形式动态输入参数，那么实际插入的参数是一个字符串，SQL语句不合法。
+*/
 ```
 
 

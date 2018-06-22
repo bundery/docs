@@ -4,7 +4,8 @@
 
 > 比如 https://www.googlecom：
 >
-> - https：代表协议sina.com 代表域名，购买的时候一般买的是域名；
+> - https：代表协议；
+> - sina.com 代表域名，购买的时候一般买的是域名；
 > - www.sina.com：代表主机名，一个域名下面可以搭载多台虚拟主机（网站），如：www.google.com 和 mail.google.com。
 
 ## server.xml
@@ -17,7 +18,7 @@ server.xml 配置的是 Tomcat 的启动信息，在此文件中配置端口、H
 
    ```xml
    <Host  name="www.test.com" appBase="/home/jerry" autoDeploy="true" unpackWARs="true">
-         <Context path="/image" docBase="/home/jerry/litin-image" reloadable="true"></Context>
+     <Context path="/image" docBase="/home/jerry/litin-image" reloadable="true"></Context>
    </Host>
    ```
 

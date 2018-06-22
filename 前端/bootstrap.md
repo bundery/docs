@@ -32,7 +32,7 @@
 
 - 关闭窗口：`$("#myModal").modal('hide');`
 
-- modal 关闭时清空数据：
+- modal关闭时清空数据：
 
   ```javascript
   //为modal关闭后绑定方法
@@ -42,10 +42,8 @@
   ```
 
 
-
-
 ## 问题
 
 ### 禁用状态和只读状态
 
-输入框设置 `disabled` 和 `readOnly`  都能起到不能输入的效果，但是 disabled 状态的输入框不能被读取到，如：`$("#id,#name").serialize()` 。
+输入框设置`disabled`和`readOnly`都能起到不能输入的效果，但是 disabled 状态的输入框不能被读取到，如：`$("#id,#name").serialize()` 。
