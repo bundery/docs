@@ -2,7 +2,7 @@
 
 一个 tomcat 容器中可以放置多个网站（虚拟主机），1个网站可以有多个 Web应用，在 tomcat 中一个 `Host` 代表一个网站，一个 `Context` 代表一个 Web 应用。
 
-> 比如 https://www.googlecom：
+> 比如 https://www.googlecom
 >
 > - https：代表协议；
 > - sina.com 代表域名，购买的时候一般买的是域名；
